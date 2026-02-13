@@ -134,7 +134,7 @@ public class ScoreSheet
     /// <summary>
     /// 모든 항목이 기록되었는지 확인합니다 (13턴 완료 체크용)
     /// </summary>
-    public bool IsComplete()
+    public bool IsScoreSheetComplete()
     {
         return ones >= 0 && twos >= 0 && threes >= 0 && fours >= 0 && 
                fives >= 0 && sixes >= 0 && threeOfAKind >= 0 && 
@@ -142,4 +142,3 @@ public class ScoreSheet
                largeStraight >= 0 && yacht >= 0 && chance >= 0;
     }
 }
-

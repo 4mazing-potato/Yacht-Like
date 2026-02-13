@@ -195,4 +195,3 @@ public class ScoreManager : MonoBehaviour
         return diceValues.Sum();
     }
 }
-

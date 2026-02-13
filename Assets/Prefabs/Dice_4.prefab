@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2018703313797814252}
   - component: {fileID: 3127316931990253069}
   - component: {fileID: -6954215696378905584}
-  - component: {fileID: -3656844935976921751}
+  - component: {fileID: -8968141753704918287}
   m_Layer: 0
   m_Name: Dice_4
   m_TagString: Untagged
@@ -139,7 +139,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.59, y: 2.32}
   m_EdgeRadius: 0
---- !u!114 &-3656844935976921751
+--- !u!114 &-8968141753704918287
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,8 +148,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7315393905354248423}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3844f7a3deb8a6642b578f0c0458d457, type: 3}
+  m_Script: {fileID: 11500000, guid: 255433b3e7a23bd4f84f51a8f2639996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DiceController
-  lockedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  unlockedColor: {r: 1, g: 1, b: 1, a: 1}
+  diceIndex: 0
