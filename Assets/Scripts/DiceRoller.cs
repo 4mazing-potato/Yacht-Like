@@ -2,10 +2,26 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class DiceRoll : MonoBehaviour
+public class DiceRoller : MonoBehaviour
 {
     [Header("Dice Prefab")]
     [SerializeField] private GameObject[] dicePrefab;
+
+    // 주사위 굴리기 중인지 여부
+    // [True -> 플레이어 행동 못함 / False -> 플레이어 행동 가능] <= 사실상 이걸로 쓰임
+    public bool IsRolling { get; private set; }
+    
+    // 게임 화면 상 왼쪽부터 주사위 1 -> 주사위 2 -> ... -> 주사위 5
+    // 현재 패의 주사위 눈 { 주사위 눈1, 주사위 눈2, 주사위 눈3, 주사위 눈4, 주사위 눈5 }
+    public List<int> GetCurrentDiceValues()
+    {
+        List<int> values = new List<int>();
+        foreach (DiceData diceData in diceDataList)
+        {
+            values.Add(diceData.value);
+        }
+        return values;
+    }
 
     private List<DiceData> diceDataList = new List<DiceData>();
     private List<GameObject> diceGameObjects = new List<GameObject>();
@@ -23,6 +39,9 @@ public class DiceRoll : MonoBehaviour
 
     public IEnumerator RollDiceSequence()
     {
+        if (IsRolling) yield break;
+        IsRolling = true;
+
         int diceCount = 5;
         Vector3 centerPosition = new Vector3(0, -3.5f, 0);
 
@@ -52,6 +71,7 @@ public class DiceRoll : MonoBehaviour
 
             yield return new WaitForSeconds(0.5f);
         }
+        IsRolling = false;
     }
 
     IEnumerator MoveDiceToTarget(GameObject dice, Vector3 targetPosition)
@@ -73,6 +93,9 @@ public class DiceRoll : MonoBehaviour
 
     public IEnumerator ReRollDiceSequence()
     {
+        if (IsRolling) yield break;
+        IsRolling = true;
+
         for (int i = 0; i < diceDataList.Count; i++)
         {
             // 잠기지 않은 주사위만 리롤
@@ -102,6 +125,7 @@ public class DiceRoll : MonoBehaviour
                 yield return new WaitForSeconds(0.1f);  // 살짝 딜레이
             }
         }
+        IsRolling = false;
     }
 
     Vector3 CalculateTargetPosition(int index)
@@ -112,5 +136,27 @@ public class DiceRoll : MonoBehaviour
         float startX = centerPosition.x - (totalWidth / 2f);
         float xPosition = startX + (index * 1.5f);
         return new Vector3(xPosition, centerPosition.y, 0);
+    }
+
+    public IEnumerator StartNewTurnSequence()
+    {
+        if (IsRolling) yield break;
+        IsRolling = true;
+
+        foreach (GameObject dice in diceGameObjects)
+        {
+            if (dice != null)
+            {
+                Destroy(dice);
+            }
+        }
+        diceGameObjects.Clear();
+        diceDataList.Clear();
+
+        yield return null;
+
+        IsRolling = false;
+
+        yield return StartCoroutine(RollDiceSequence());
     }
 }

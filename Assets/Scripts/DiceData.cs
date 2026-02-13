@@ -12,6 +12,7 @@ public class DiceData
         isLocked = false;
     }
 
+    // 주사위 데이터 { 주사위 눈, 잠금 여부 }
     public DiceData(int diceValue)
     {
         value = diceValue;
