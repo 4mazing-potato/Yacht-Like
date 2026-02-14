@@ -4,12 +4,13 @@ using System.Collections.Generic;
 public class TurnManager : MonoBehaviour
 {
     [Header("Turn Settings")]
-    [SerializeField] private int totalTurns = 13;
+    [SerializeField] private int totalTurns = 12;
     [SerializeField] private int ReRollsPerTurn = 2; // 턴 당 리롤 횟수
 
     [Header("References")]
     [SerializeField] private DiceRoller diceRoller;
     [SerializeField] private ScoreManager scoreManager;
+    [SerializeField] private UIManager uiManager;
 
     private ScoreSheet scoreSheet = new ScoreSheet();
     private int currentTurn = 1;
@@ -65,8 +66,8 @@ public class TurnManager : MonoBehaviour
         bool recorded = scoreSheet.RecordScore(scoretype, score);
         if(!recorded) return;
         
+        uiManager.UpdateScoreSlot(scoretype, score);
+        
         EndTurn();
     }
-
-    
 }

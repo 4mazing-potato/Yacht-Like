@@ -34,8 +34,6 @@ public class ScoreManager : MonoBehaviour
                 return CountValue(sortedValues, 6);
             
             // 하위 항목 (Lower Section)
-            case "ThreeOfAKind":
-                return CalculateThreeOfAKind(sortedValues);
             case "FourOfAKind":
                 return CalculateFourOfAKind(sortedValues);
             case "FullHouse":
@@ -70,23 +68,7 @@ public class ScoreManager : MonoBehaviour
         }
         return count;
     }
-    
-    /// <summary>
-    /// 같은 숫자가 3개 이상 있으면 모든 주사위 합계, 아니면 0
-    /// </summary>
-    private int CalculateThreeOfAKind(List<int> diceValues)
-    {
-        for (int i = 1; i <= 6; i++)
-        {
-            int count = diceValues.Count(x => x == i);
-            if (count >= 3)
-            {
-                return diceValues.Sum();  // 모든 주사위 합계
-            }
-        }
-        return 0;
-    }
-    
+       
     /// <summary>
     /// 같은 숫자가 4개 이상 있으면 모든 주사위 합계, 아니면 0
     /// </summary>

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 
 public class DiceRoller : MonoBehaviour
 {
@@ -76,19 +77,9 @@ public class DiceRoller : MonoBehaviour
 
     IEnumerator MoveDiceToTarget(GameObject dice, Vector3 targetPosition)
     {
-        Vector3 startPosition = dice.transform.position;
-        float duration = 0.25f;
-        float elapsed = 0;
+        if (dice == null) yield break;
 
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float t = elapsed / duration;
-            dice.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
-            yield return null;
-        }
-
-        dice.transform.position = targetPosition;
+        yield return dice.transform.DOMove(targetPosition, 0.5f).SetEase(Ease.OutQuad).WaitForCompletion();
     }
 
     public IEnumerator ReRollDiceSequence()

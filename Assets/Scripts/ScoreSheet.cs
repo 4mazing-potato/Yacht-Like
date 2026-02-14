@@ -17,7 +17,6 @@ public class ScoreSheet
     public int sixes = -1;
     
     // 하위 항목 (Lower Section)
-    public int threeOfAKind = -1;
     public int fourOfAKind = -1;
     public int fullHouse = -1;
     public int smallStraight = -1;
@@ -56,7 +55,6 @@ public class ScoreSheet
         int total = GetUpperSum() + GetBonus();
         
         // 하위 항목 합계
-        if (threeOfAKind >= 0) total += threeOfAKind;
         if (fourOfAKind >= 0) total += fourOfAKind;
         if (fullHouse >= 0) total += fullHouse;
         if (smallStraight >= 0) total += smallStraight;
@@ -98,10 +96,6 @@ public class ScoreSheet
                 if (sixes >= 0) return false;
                 sixes = score;
                 return true;
-            case "ThreeOfAKind":
-                if (threeOfAKind >= 0) return false;
-                threeOfAKind = score;
-                return true;
             case "FourOfAKind":
                 if (fourOfAKind >= 0) return false;
                 fourOfAKind = score;
@@ -137,7 +131,7 @@ public class ScoreSheet
     public bool IsScoreSheetComplete()
     {
         return ones >= 0 && twos >= 0 && threes >= 0 && fours >= 0 && 
-               fives >= 0 && sixes >= 0 && threeOfAKind >= 0 && 
+               fives >= 0 && sixes >= 0 &&
                fourOfAKind >= 0 && fullHouse >= 0 && smallStraight >= 0 && 
                largeStraight >= 0 && yacht >= 0 && chance >= 0;
     }
