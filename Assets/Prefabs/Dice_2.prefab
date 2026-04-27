@@ -152,3 +152,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DiceController
   diceIndex: 0
+  spriteRenderer: {fileID: 3127316931990253069}

@@ -35,6 +35,34 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void UpdateSummaryText(int upperSum, int bonus, int totalScore, bool showTotalScore)
+    {
+        if ( upperSumText != null) 
+        {
+            upperSumText.text = upperSum.ToString();
+        }
+        if (bonusText != null)
+        {
+            bonusText.text = bonus.ToString();
+        }
+        if (totalScoreText != null)
+        {
+            totalScoreText.text = showTotalScore ? totalScore.ToString() : "";
+        }
+    }
+
+    public void UpdateTurnInfoText(int currentTurn, int totalTurns, int rerollsLeft)
+    {
+        if (turnText != null)
+        {
+            turnText.text = $"{currentTurn} / {totalTurns}";
+        }
+        if (rerollsLeftText != null)
+        {
+            rerollsLeftText.text = rerollsLeft.ToString();
+        }
+    }
+
     private TMP_Text GetScoreSlotText(string scoreType)
     {
         switch (scoreType)
@@ -54,4 +82,6 @@ public class UIManager : MonoBehaviour
             default: return null;
         }
     }
+
+    
 }

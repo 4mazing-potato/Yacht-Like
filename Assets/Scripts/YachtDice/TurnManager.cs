@@ -32,6 +32,8 @@ public class TurnManager : MonoBehaviour
     void StartTurn()
     {
         rerollsLeft = ReRollsPerTurn;
+        uiManager.UpdateTurnInfoText(currentTurn, totalTurns, rerollsLeft);
+        RefreshSummaryUI(false);
         StartCoroutine(diceRoller.StartNewTurnSequence());
     }
 
@@ -41,6 +43,7 @@ public class TurnManager : MonoBehaviour
         if (rerollsLeft <= 0) return;
 
         rerollsLeft--;
+        uiManager.UpdateTurnInfoText(currentTurn, totalTurns, rerollsLeft);
         StartCoroutine(diceRoller.ReRollDiceSequence());
     }
 
@@ -50,6 +53,7 @@ public class TurnManager : MonoBehaviour
 
         if (currentTurn > totalTurns)
         {
+            RefreshSummaryUI(true);
             Debug.Log("Game Over!");
             return;
         }
@@ -69,5 +73,14 @@ public class TurnManager : MonoBehaviour
         uiManager.UpdateScoreSlot(scoretype, score);
         
         EndTurn();
+    }
+
+    private void RefreshSummaryUI(bool showTotalScore)
+    {
+        int upperSum = scoreSheet.GetUpperSum();
+        int bonus = scoreSheet.GetBonus();
+        int totalScore = scoreSheet.GetTotalScore();
+
+        uiManager.UpdateSummaryText(upperSum, bonus, totalScore, showTotalScore);
     }
 }
